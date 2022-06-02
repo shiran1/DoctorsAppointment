@@ -1,0 +1,28 @@
+Question 2
+Dr. John is a doctor. He has a private clinic center. Every evening he is treating the patients. He plans to
+use a system to manage his patients’ information. His decided on a system that needs to achieve the
+following requirements:
+● Maintain the personal details of the patients (name, birthday, contact no, photo, nic, notes)
+● Need to record the all the prescriptions that relevant to each patient with particular date
+● Tracking the bill payments
+● Before treat the patient, needs to observe the previous records of the patient (use the personal
+details of the patient to filter the patient’s record)
+● Revenue report for given time period
+Develop an appropriate system to fulfill the Dr. John’s requirements
+Deliverables:
+● You are to develop a web based application using PHP/Python, MySQL/MariaDB, Javascript, CSS3
+& Html5.
+● Code should be available via GitHub with deploy instructions.
+● There is only ONE user, the doctor.
+● Reports needed,
+○ Revenue for a given period
+● MS-Word (or compatible) document with screenshots and captions
+Marking guide:
+1. Requirement document with flow chart & database relationship diagrams. It should also contain the
+final project UI screenshots (MS-Word, Google Doc, PDF or compatible)
+2. Use of validated HTML5
+3. Seperate CSS & JS files
+4. Responsive UI
+5. Clean code (indentation, spacing, naming convention, comments)
+6. Use of frameworks (CSS, JS, PHP Laravel, Python Django)
+7. OOP principles
