@@ -1,0 +1,67 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+    {#   create html table for patient list with name , birthday, contact_no, photos, nic #}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row my-4 align-items-center">
+                    <div class="col-6">
+                        <h4>Patient List</h4>
+                        <form action="">
+                            <div class="input-group mb-3">
+                                {% for form in filter.form %}
+                                    <input type="search" name="{{ form.name }}" class="form-control"
+                                           placeholder="{{ form.label }}">
+                                {% endfor %}
+
+                                <span class="input-group-text">
+                                    <button type="submit"><i class="fa fa-search"></i></button>
+
+                                </span>
+                                <span class="input-group-text">
+                                    <a href="{% url 'patients:list' %}">resets filters</a>
+                                </span>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="col-6 mt-4">
+
+                        <a href="{% url 'patients:create' %}" class="btn btn-primary float-right">New Patient</a>
+                    </div>
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Contact No</th>
+                        <th>Photo</th>
+                        <th>Consult</th>
+                        <th>edit</th>
+                        <th>delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for patient in patients_qs %}
+                        <tr>
+                            <td><a href="{{ patient.get_info_url }}">{{ patient.name|slice:30 }}</a></td>
+                            <td>{{ patient.age }} Y</td>
+                            <td>{{ patient.contact_no }}</td>
+                            {% if patient.photo %}
+                                <td><img src="{{ patient.photo.url }}" width="50" height="50" alt="profile"/></td>
+                            {% else %}
+                                <td>No Image</td>
+                            {% endif %}
+                            <td><a href="{% url 'patients:diagnose_list' patient.id %}">see</a></td>
+                            <td><a href="{{ patient.get_edit_url }}">edit</a></td>
+                            <td><a href="{{ patient.get_delete_url }}">delete</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+{% endblock %}

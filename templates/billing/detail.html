@@ -1,0 +1,52 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+    {# detail page for a patient with name, birthday, a table for consultation details #}
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="d-flex gap-3">
+                    <div>
+                        {% if patient.photo %}
+                            <img class="img-thumbnail" width="100" height="100" src="{{ patient.photo.url }}" alt="">
+                        {% endif %}
+                    </div>
+                    <div class="pe-2">
+                        <h4>{{ patient.name }}</h4>
+                        <p><span>{{ patient.birthday }} ({{ patient.age }} years)</span></p></div>
+                </div>
+
+
+                <div class="card text-start mt-3">
+                    <div class="card-header">
+                        <h4>Notes</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ patient.notes }}
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Diagnoses</h4>
+                        <p>{{ consultation.diagnosis }}</p>
+                        <h4>Treatment</h4>
+                        <p>{{ consultation.treatment }}</p>
+                        <h4>Prescription</h4>
+                        <p>{{ consultation.prescription }}</p>
+                    </div>
+                    <div class="card-footer ">
+                        Total Fee : {{ consultation.fee }}
+                        <a href="{% url 'patients:detail' patient.id %}" class="btn btn-dark float-end mx-2">Go back</a>
+                        <a href="{% url 'patients:diagnose_edit' patient.id consultation.id %}" class="btn btn-primary float-end mx-2">Edit</a>
+                        <a href="{% url 'patients:diagnose_delete' patient.id consultation.id %}" class="btn btn-danger float-end mx-2">delete</a>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+{% endblock %}

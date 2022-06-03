@@ -1,0 +1,67 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+    {# detail page for a patient with name, birthday, a table for consultation details #}
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="d-flex gap-3">
+                    <div>
+                        {% if patient.photo %}
+                            <img class="img-thumbnail" width="100" height="100" src="{{ patient.photo.url }}" alt="">
+                        {% endif %}
+                    </div>
+                    <div class="pe-2">
+                        <h4>{{ patient.name }}</h4>
+                        <p><span>{{ patient.birthday }} ({{ patient.age }} years)</span></p>
+                        <p>Total Due: {{ due_billing }}</p>
+                    </div>
+                </div>
+                {% if patient.notes %}
+                    <div class="card text-start mt-3">
+                        <div class="card-header">
+                            <h4>Notes</h4>
+                        </div>
+                        <div class="card-body">
+                            {{ patient.notes }}
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="pe-4"> No notes </p>
+                {% endif %}
+
+
+            </div>
+            <div class="col-md-8">
+                <a class="btn btn-primary my-2 float-end" href="{% url 'patients:diagnose_create' patient.id %}"> Add
+                    New Diagnose</a>
+                <a class="btn btn-secondary m-2 float-end" href="{% url 'patients:list' %}"> Back</a>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Diagnose</th>
+                        <th>Treatment</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for consultation in consultations %}
+                        <tr>
+
+                            <td>{{ consultation.updated_at|date }}</td>
+                            <td>{{ consultation.diagnosis|truncatewords:5 }}</td>
+                            <td>{{ consultation.treatment|truncatechars:7 }}</td>
+                            <td><a href="{% url 'patients:diagnose_detail' patient_pk=patient.id pk=consultation.id %}">
+                                see more</td>
+                        </tr>
+
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}
