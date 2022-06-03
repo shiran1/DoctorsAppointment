@@ -42,8 +42,11 @@
                         <a href="{% url 'patients:detail' patient.id %}" class="btn btn-dark float-end mx-2">Go back</a>
                         <a href="{% url 'patients:diagnose_edit' patient.id consultation.id %}"
                            class="btn btn-primary float-end mx-2">Edit</a>
-                        <a href="{% url 'patients:billing_create' patient.id consultation.id %}"
-                           class="btn btn-success float-end mx-2">Billing</a>
+                        {% if  patient.billings %}
+                            <a href="{% url 'patients:billing_create' patient.id consultation.id %}"
+                               class="btn btn-success float-end mx-2">Billing</a>
+                        {% endif %}
+
                         <a href="{% url 'patients:diagnose_delete' patient.id consultation.id %}"
                            class="btn btn-danger float-end mx-2">delete</a>
 

@@ -9,7 +9,7 @@ from django.urls import reverse
 
 class Patient(models.Model):
     name = models.CharField(max_length=100)
-    birthday = models.DateField(blank=True, null=True)
+    birthday = models.DateField()
     contact_no = models.CharField(max_length=20, validators=[MinLengthValidator(10)])
     photo = models.ImageField(upload_to='patients/photos', blank=True, null=True)
     nic = models.CharField(max_length=20, blank=True, null=True,
